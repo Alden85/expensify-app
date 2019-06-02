@@ -1,4 +1,5 @@
 const path = require("path");
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 /*we have access to path.join and we can use it to join our obsolute
    path(where project resides ) and local path in public folder.
     */
@@ -14,36 +15,58 @@ const path = require("path");
   we will join together the absolute path that __dirname returns to the local path of the public folder.
 */
 
-module.exports = {
-  entry: "./src/app.js", //webpack is running this file.
-  output: {
-    path: path.join(
-      __dirname,
-      "public"
-    ) /*absolute path on your machine to where you want to output your webpack file (bundle.js )file and we want to put it in the public folder of the project*/,
-    filename:
-      "bundle.js" /*filename can be anything you like, but common filename is bundle.js */
-  },
-  module: {
-    rules: [
-      {
-        loader: "babel-loader",
-        test: /\.js$/,
-        exclude: /node_modules/
-      },
-      {
-        test:/\.s?css$/,
-        use: [
-          'style-loader',
-          'css-loader',
-          'sass-loader'
-        ]//use allows us to define an array of loaders.
-      }
-    ]
-  },
-  devtool: "cheap-module-eval-source-map",
-  devServer: {
-    contentBase: path.join(__dirname, "public"),
-    historyApiFallback: true // tells the dev server we are handling routing via client side code and that it shoudl return index.html for all 404 routes.
-  }
+module.exports = (env) => {
+  const isProduction = env === 'production';
+ 
+  return {
+    entry: "./src/app.js", //webpack is running this file.
+    output: {
+      path: path.join(
+        __dirname,
+        "public"
+      ) /*absolute path on your machine to where you want to output your webpack file (bundle.js )file and we want to put it in the public folder of the project*/,
+      filename:
+        "bundle.js" /*filename can be anything you like, but common filename is bundle.js */
+    },
+    module: {
+      rules: [
+        {
+          loader: "babel-loader",
+          test: /\.js$/,
+          exclude: /node_modules/
+        },
+        {
+          test:/\.s?css$/,
+          use:[
+            MiniCssExtractPlugin.loader,
+            {
+              loader:'css-loader',
+              options:{
+                sourceMap:true
+              }
+            },
+            {
+              loader:'sass-loader',
+              options:{
+                sourceMap:true
+              }
+            }
+          ]
+          //use allows us to define an array of loaders.
+        }
+      ]
+    },
+
+    plugins:[
+      new MiniCssExtractPlugin({
+        filename:'styles.css'
+      })
+    ],
+
+    devtool: isProduction ? 'source-map' : "inline-source-map",
+    devServer: {
+      contentBase: path.join(__dirname, "public"),
+      historyApiFallback: true // tells the dev server we are handling routing via client side code and that it shoudl return index.html for all 404 routes.
+    }
+  };
 };
