@@ -3,9 +3,11 @@ import React from "react"; //here React is a default export in the module react.
 import ExpenseList from './ExpenseList.js';
 //import {connect} from 'react-redux';
 import ExpenseListFilters from './ExpenseListFilters';
+import ExpensesSummary from './ExpensesSummary';
 
 const ExpenseDashboardPage = () => (
   <div>
+    <ExpensesSummary />
    <ExpenseListFilters />
    <ExpenseList />
   </div>

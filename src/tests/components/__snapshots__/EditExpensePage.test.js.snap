@@ -5,7 +5,7 @@ exports[`should render editExpense page 1`] = `
   <ExpenseForm
     expense={
       Object {
-        "amount": 500000,
+        "amount": 4500,
         "createdAt": 345600000,
         "description": "Credit Card",
         "id": "3",
