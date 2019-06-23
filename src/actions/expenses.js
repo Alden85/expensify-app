@@ -38,6 +38,17 @@ export const removeExpense = ({ id } = {}) => {
     id
   };
 };
+
+//asyncronous action function, will do asyncronous work to communicate with database,
+//then it will dispatch a asyncronous action then it will dispatch the redux store
+export const startRemoveExpense = ({id}={})=>{
+  return (dispatch)=>{
+    return database.ref(`expenses/${id}`).remove().then(()=>{
+        dispatch(removeExpense({id}));
+    });
+  };
+};
+
 //EDIT_EXPENSE
 export const editExpense = (id, updates) => ({
   type: "EDIT_EXPENSE",
