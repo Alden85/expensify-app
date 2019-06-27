@@ -1,5 +1,6 @@
 import * as firebase from "firebase"; /*takes all named exports from firebase and puts them in a variable firebase */
 
+
 const config = {
   apiKey: process.env.FIREBASE_API_KEY,
   authDomain: process.env.FIREBASE_AUTH_DOMAIN,
@@ -13,7 +14,9 @@ const config = {
 firebase.initializeApp(config);
 const database = firebase.database();
 
-export {firebase,database as default};
+const googleAuthProvider = new firebase.auth.GoogleAuthProvider();
+
+export {firebase,googleAuthProvider,database as default};
 
 // database.ref('expenses').on('child_removed',(snapshot)=>{
 //   console.log(snapshot.key,snapshot.val());
