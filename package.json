@@ -27,6 +27,7 @@
     "firebase": "^6.2.0",
     "fkill": "^6.1.0",
     "global": "^4.3.2",
+    "history": "^4.9.0",
     "mini-css-extract-plugin": "^0.7.0",
     "moment": "^2.24.0",
     "node-sass": "^4.12.0",
