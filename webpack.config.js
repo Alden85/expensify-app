@@ -27,7 +27,7 @@ module.exports = (env) => {
   const isProduction = env === 'production';
  
   return {
-    entry: "./src/app.js", //webpack is running this file.
+    entry: ['babel-polyfill',"./src/app.js"], //webpack is running this file.
     output: {
       path: path.join(
         __dirname,

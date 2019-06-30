@@ -1,0 +1,19 @@
+.button-rest{
+  background: $blue;
+  color:white;
+  border: none;
+  padding:$s-size;
+  font-weight: 300;
+  font-size: $font-size-large;
+  display: inline-block;
+  text-decoration: none;
+  line-height: 1;
+}
+
+.button-rest--link{
+  background: none;
+}
+.button-rest--secondary{
+  @extend .button-rest;
+  background: #ED2939;
+}
